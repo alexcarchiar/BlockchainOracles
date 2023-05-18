@@ -1,0 +1,6 @@
+#Get http://localhost:3000
+
+///
+#Get http://localhost:3000/posts
+
+Get http://localhost:3000/posts/latest
