@@ -28,7 +28,21 @@ contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
      */
     constructor() ConfirmedOwner(msg.sender) {
         setChainlinkToken(0x779877A7B0D9E8603169DdbD7836e478b4624789);
+        /* sets the smart contract that specifies the token we want 
+        to use to pay for requests to the Chainlink oracle node. 
+        In this case the address is hardcoded to the address 
+        of the smart contract for LINK tokens on the sepolia testnet
+        */
         setChainlinkOracle(0x6090149792dAAeE9D1D568c9f9a6F6B46AA29eFD);
+        /* specifies the oracle node that we want to interact with. 
+        In a production environment, this method would be called 
+        multiple times, whenever it is needed to change the oracle node. 
+        In the testnet, we only have access to one oracle node. 
+        Thus we hardcode the node to that specific oracle node.
+        */
+        /*The methods in line 30 and 31 are inherited from "ChainlinkClient"
+        contract. Thus their operation is defined in those contracts.
+        */
         jobId = "7d80a6386ef543a3abb52817f6707e3b";
         fee = (1 * LINK_DIVISIBILITY) / 10; // 0,1 * 10**18 (Varies by network and job)
         counter = 0;
@@ -72,6 +86,10 @@ contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
         }
 
         return sendChainlinkRequest(req, fee);
+        /* sends a request to the oracle node 
+        specified at line 31 and keeps track 
+        of a request Id.
+        */
     }
 
     /**
@@ -80,7 +98,11 @@ contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
     function fulfill(
         bytes32 _requestId,
         string memory _currString
-    ) public recordChainlinkFulfillment(_requestId) {
+    ) public recordChainlinkFulfillment(_requestId) { 
+    /* the modifier recordChainlinkFulfillment(_requestId) 
+        checks that the request Id that was received is 
+        valid and it is the same as the one stored in line 74.
+        */
         emit RequestLatestPost(_requestId, _currString);
         if (counter == 0) {
             title = _currString;
