@@ -17,7 +17,7 @@ contract ExampleContract is usingProvable {
         LogConstructorInitiated("Constructor was initiated. Call 'updateArticle() to send the Provable Query.");
     }
 
-    function __callback(bytes32 myid, string result, bytes proof) {
+    function __callback(bytes32 myid, string result, bytes proof) { //Update the article variables
         if (!validIds[myid]) revert();
         if (msg.sender != provable_cbAddress()) revert();
         latestArticle = result;
@@ -25,7 +25,7 @@ contract ExampleContract is usingProvable {
         LogArticleUpdated(result);
     }
 
-    function updateArticle() payable {
+    function updateArticle() payable { //send a request to fetch the data to update the article
         if (provable_getPrice("URL") > this.balance){
             LogNewProvableQuery("Provable query was NOT sent, please add some ETH to cover for the query fee");
         } else {
