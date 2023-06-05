@@ -22,9 +22,9 @@ An article is a json object defined as:
 ```
 
 The Data source is a Proof of Concept that provides a very simple API with three requests:
-- GET /posts - Provides all of the posts that are on database
-- POST /posts - Allows one to submit a new article to the WebApp
-- GET /posts/latest - Allows one to get the latest article that was submitted to the WebApp
+- GET https://data-source.onrender.com/posts - Provides all of the posts that are on database
+- POST https://data-source.onrender.com/posts - Allows one to submit a new article to the WebApp
+- GET https://data-source.onrender.com/posts/latest - Allows one to get the latest article that was submitted to the WebApp
 
 The paper focuses on some of the security aspects for blockchain oracles, thus the Data source
 is barebones and has very limited functionality. This is because Web development and 
@@ -68,5 +68,4 @@ The app will run on `localhost:3000`.
 
 One demo is available here: https://data-source.onrender.com
 
-The homepage just shows a `We are on home` line.
 You can check that the API works as defined above.
