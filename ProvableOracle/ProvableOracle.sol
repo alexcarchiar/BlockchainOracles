@@ -1,12 +1,13 @@
 pragma solidity ^0.4.22;
-import "https://github.com/provable-things/ethereum-api/blob/master/contracts/solc-v0.4.25/provableAPI.sol";
 
+import "https://github.com/provable-things/ethereum-api/blob/master/contracts/solc-v0.4.25/provableAPI.sol";
 
 contract ExampleContract is usingProvable {
 
     string public latestArticle;
     bytes public AuthenticityProof;
     mapping(bytes32=>bool) validIds;
+   
     event LogConstructorInitiated(string nextStep);
     event LogArticleUpdated(string article);
     event LogNewProvableQuery(string description);
