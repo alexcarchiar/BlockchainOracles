@@ -1,6 +1,6 @@
 pragma solidity ^0.4.22;
 
-import "https://github.com/provable-things/ethereum-api/blob/master/contracts/solc-v0.4.25/provableAPI.sol";
+import "https://github.com/provable-things/ethereum-api/blob/master/contracts/solc-v0.4.25/provableAPI.sol"; //This import is to inherit the interface to communicate with Provable oracle service
 
 contract ExampleContract is usingProvable {
 
