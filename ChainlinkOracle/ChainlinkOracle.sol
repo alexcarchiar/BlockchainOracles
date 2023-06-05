@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
-import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
+import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol"; // This import is to inherit the Chainlink interface to communicate with oracle nodes
+import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol"; // This import is to inherit the ConfirmedOwner modifier which allows to check the owner of the contract
 
 contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
@@ -12,8 +12,8 @@ contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
     string public signature;
     uint256 public counter;
 
-    bytes32 private jobId;
-    uint256 private fee;
+    bytes32 private jobId; // this is the id used by the chainlink node to uniquely identify the job we want to use
+    uint256 private fee; // this is the fee that we are willling to pay for a request. We pay every time we perform a successful request.
 
     event RequestLatestPost(bytes32 indexed requestId, string title);
 
