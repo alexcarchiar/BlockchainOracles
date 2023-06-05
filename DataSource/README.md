@@ -66,7 +66,7 @@ The app will run on `localhost:3000`.
 
 ## Demo
 
-One demo is available here: https://two-oracle-thesis-web-app.onrender.com
+One demo is available here: https://data-source.onrender.com
 
 The homepage just shows a `We are on home` line.
 You can check that the API works as defined above.
