@@ -9,13 +9,17 @@ Similarly, the Chainlink directory holds the necessary files and resources for i
 Lastly, the DataSource directory encompasses the files and resources for the Data source web application. This web application acts as a source of data for the smart contracts, providing the necessary information for their operations. To understand how the Data source web application works in detail, please refer to the README file located within this directory.
 
 **Video Demos**
+
 These demos show how the oracle work with a Data source and a data destination that queries the state of the oracles. The videos only interact with the Chainlink oracle.
 
 Long version: https://youtu.be/in5Bxblfmdk
+
 Short version: https://youtu.be/iB1xukKEpvk
 
 **Oracles Setup**
+
 You need to perform multiple steps.
+
 1. Import the oracles in Remix IDE or copy-paste the code from the files.
 2. Create an Ethereum address (e.g., MetaMask is the recommended option).
 3. Add the two testnets for the oracles. Sepolia for Chainlink, Goerli for Provable.
