@@ -1,9 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol"; // This import is to inherit the Chainlink interface to communicate with oracle nodes
-import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol"; // This import is to inherit the ConfirmedOwner modifier which allows to check the owner of the contract
+/**  
+ * This import is to inherit the Chainlink interface to communicate with oracle nodes.
+ * The methods setChainlinkToken and setChainlinkOracle are inherited from "ChainlinkClient" contract.
+*/
+import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol"; 
 
+// This import is to inherit the ConfirmedOwner modifier which allows to check the owner of the contract.
+import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
+
+/** 
+ * This smart contract specify to get the latest post.
+*/
 contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
 
@@ -12,8 +21,11 @@ contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
     string public signature;
     uint256 public counter;
 
-    bytes32 private jobId; // this is the id used by the chainlink node to uniquely identify the job we want to use
-    uint256 private fee; // this is the fee that we are willling to pay for a request. We pay every time we perform a successful request.
+    // this is the id used by the chainlink node to uniquely identify the job we want to use
+    bytes32 private jobId;
+    
+    // this is the fee that we are willling to pay for a request. We pay every time we perform a successful request.
+    uint256 private fee;
 
     event RequestLatestPost(bytes32 indexed requestId, string title);
 
@@ -27,22 +39,23 @@ contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
      *
      */
     constructor() ConfirmedOwner(msg.sender) {
+        /**  
+         * Sets the smart contract that specifies the token we want 
+         * to use to pay for requests to the Chainlink oracle node. 
+         * In this case the address is hardcoded to the address 
+         * of the smart contract for LINK tokens on the sepolia testnet
+        */
         setChainlinkToken(0x779877A7B0D9E8603169DdbD7836e478b4624789);
-        /* sets the smart contract that specifies the token we want 
-        to use to pay for requests to the Chainlink oracle node. 
-        In this case the address is hardcoded to the address 
-        of the smart contract for LINK tokens on the sepolia testnet
+       
+        /** 
+         * Specifies the oracle node that we want to interact with. 
+         * In a production environment, this method would be called 
+         * multiple times, whenever it is needed to change the oracle node. 
+         * In the testnet, we only have access to one oracle node. 
+         * Thus we hardcode the node to that specific oracle node.
         */
         setChainlinkOracle(0x6090149792dAAeE9D1D568c9f9a6F6B46AA29eFD);
-        /* specifies the oracle node that we want to interact with. 
-        In a production environment, this method would be called 
-        multiple times, whenever it is needed to change the oracle node. 
-        In the testnet, we only have access to one oracle node. 
-        Thus we hardcode the node to that specific oracle node.
-        */
-        /*The methods in line 30 and 31 are inherited from "ChainlinkClient"
-        contract. Thus their operation is defined in those contracts.
-        */
+        
         jobId = "7d80a6386ef543a3abb52817f6707e3b";
         fee = (1 * LINK_DIVISIBILITY) / 10; // 0,1 * 10**18 (Varies by network and job)
         counter = 0;
@@ -50,7 +63,7 @@ contract GetLatestPost is ChainlinkClient, ConfirmedOwner {
 
     /**
      * Create a Chainlink request to retrieve API response, find the target
-     * data which is located in a list
+     * data which is located in a list.
      */
     function requestLatestPost() public returns (bytes32 requestId) {
         Chainlink.Request memory req = buildChainlinkRequest(
