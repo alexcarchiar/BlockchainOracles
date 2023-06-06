@@ -32,3 +32,10 @@ You need to perform multiple steps.
 10. Confirm the transaction.
 11. Wait for the request to be processed, it should require a couple of transactions.
 12. Now click on the buttons with the names of the variables of the contract, they should be updated.
+
+
+**Oracles Services**
+
+**Provable:** https://provable.xyz
+
+**Chainlink:** https://chain.link
